@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const HERO_VIDEO = "/hero-scroll.mp4";
+const HERO_VIDEO = "hero-scroll.mp4";
 
 type ScrollyVideoInstance = {
   destroy?: () => void;

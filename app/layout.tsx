@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   description:
     "Exclusive coastal villas and private luxury stays, considered down to the last sun-warmed stone.",
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: "favicon.svg",
+    shortcut: "favicon.svg",
   },
 };
 
