@@ -122,6 +122,15 @@ export default function Home() {
   const fallbackVideoRef = useRef<HTMLVideoElement>(null);
   const heroSequenceRef = useRef<HTMLElement>(null);
   const [isVideoReady, setIsVideoReady] = useState(false);
+
+  // The hero reveal is gated on the scrubbing video decoding its first frame.
+  // That can never happen (slow connection, codec fallback, ScrollyVideo's
+  // HTML5 path not firing onReady), which would strand the loading screen, so
+  // reveal the site regardless after a short wait and let the video catch up.
+  useEffect(() => {
+    const watchdog = window.setTimeout(() => setIsVideoReady(true), 4000);
+    return () => window.clearTimeout(watchdog);
+  }, []);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -206,7 +215,7 @@ export default function Home() {
       attachScrollyVideo();
     } else {
       scriptElement = document.createElement("script");
-      scriptElement.src = "/scrolly-video.js";
+      scriptElement.src = "scrolly-video.js";
       scriptElement.async = true;
       scriptElement.onload = attachScrollyVideo;
       document.body.appendChild(scriptElement);
