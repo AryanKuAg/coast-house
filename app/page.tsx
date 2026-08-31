@@ -128,7 +128,7 @@ export default function Home() {
   // HTML5 path not firing onReady), which would strand the loading screen, so
   // reveal the site regardless after a short wait and let the video catch up.
   useEffect(() => {
-    const watchdog = window.setTimeout(() => setIsVideoReady(true), 4000);
+    const watchdog = window.setTimeout(() => setIsVideoReady(true), Math.max(0, 4000 - performance.now()));
     return () => window.clearTimeout(watchdog);
   }, []);
   const [isLoading, setIsLoading] = useState(true);
